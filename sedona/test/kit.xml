@@ -1,0 +1,5 @@
+<sedonaKit name="ciceroTest" vendor="ciceroTest" description="justtest">
+	<depend on="sys 1.2+"/>
+	<source dir="."/>
+
+</sedonaKit>

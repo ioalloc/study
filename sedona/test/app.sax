@@ -1,0 +1,12 @@
+<sedonaApp>
+	<schema>
+		<kit name="sys"/>
+		<kit name="sox"/>
+		<kit name="inet"/>
+		<kit name="web"/>
+		<kit name="func"/>
+		<kit name="platUnix"/>
+		<kit name="ciceroTest"/>
+	</schema>
+	<app>
+		<comp name="plat" type="platUnix::"
