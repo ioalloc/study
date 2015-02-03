@@ -1,0 +1,7 @@
+<sedonaKit name="nativeTest" vendor="nativeTest" description="naaa" includeSource="true">
+	<depend on="sys 1.2+"/>
+	<source dir="."/>
+
+	<native qname="nativeTest::Mynative.add" id="100::0"/>
+
+</sedonaKit>
