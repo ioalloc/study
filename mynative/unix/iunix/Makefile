@@ -11,4 +11,4 @@ debug:$(obj)
 	gcc -o svm $(obj) -DDEBUG
 
 clean:
-	rm  svm $(obj)
+	rm  $(obj)

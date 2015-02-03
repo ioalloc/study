@@ -1,3 +1,12 @@
-class Mynative{
+class Mynative extends Component{
+	property int out
+	property int in1
+	property int in2
+
 	native static int add(int a,int b)
+
+	override void execute(){
+		out = add(in1,in2)
+	}
+
 }
