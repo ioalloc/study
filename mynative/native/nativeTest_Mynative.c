@@ -3,12 +3,12 @@
 
 Cell nativeTest_Mynative_add(SedonaVM *vm,Cell *params)
 {
-	int32_t a = params[0].ival;
-	int32_t b = params[1].ival;
+	float a = params[0].fval;
+	float b = params[1].fval;
 
 	Cell result;
 
-	result.ival = a+b;
+	result.fval = a+b;
 
 	return result;
 }

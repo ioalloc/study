@@ -13,6 +13,14 @@
 // Overview
 //////////////////////////////////////////////////////////////////////////
 
+#ifndef __UNIX__
+#define __UNIX__ value
+#endif
+
+#ifndef PLAT_BUILD_VERSION
+#define PLAT_BUILD_VERSION "1.2"
+#endif
+
 //
 // This header file defines the key types and macros used by the Sedona
 // VM for different platforms.  For each target platform the following
