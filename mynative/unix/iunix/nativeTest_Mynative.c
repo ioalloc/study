@@ -10,5 +10,7 @@ Cell nativeTest_Mynative_add(SedonaVM *vm,Cell *params)
 
 	result.fval = a+b;
 
+	//printf("Native method called!\n");
+
 	return result;
 }

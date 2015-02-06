@@ -14,7 +14,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #ifndef __UNIX__
-#define __UNIX__ value
+#define __UNIX__
 #endif
 
 #ifndef PLAT_BUILD_VERSION
