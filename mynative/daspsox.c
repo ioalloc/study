@@ -33,9 +33,10 @@ DASP_STRUCT* createdasp(const SOX_STRUCT *sox)
 {
 	DASP_STRUCT *dasp;
 	dasp = malloc(sizeof(DASP_STRUCT));
+	printf("dasp size:%d\n", sizeof(DASP_STRUCT));
 	dasp->sessionId = 0xffff;
 	dasp->seqNum = 1;
-	dasp->msgOpt &= 0x1<<4;
+	dasp->msgOpt = 0x10;
 	//dasp->msgOpt |= 0;
 	dasp->payload = sox;
 	return dasp;
@@ -55,19 +56,38 @@ SOX_STRUCT* createsox(uint8_t cmd,uint8_t replyNum,uint16_t componentId,uint8_t 
 	return sox;
 }
 
+void dasp_debug(DASP_STRUCT *dasp)
+{
+	SOX_STRUCT *sox;
+	readComp *rc;
+
+	sox = (SOX_STRUCT*)dasp->payload;
+	rc = (readComp*)sox->payload;
+
+	printf("dasp->sessionId:\tuint16_t   %d\n",dasp->sessionId);
+	printf("dasp->seqNum:\t\t uint8_t   %d\n",dasp->seqNum);
+	printf("dasp->msgOpt:\t\t uint8_t   %d\n",dasp->msgOpt);
+	printf("sox->cmd:\t\t uint8_t   %c\n",sox->cmd);
+	printf("sox->replyNum:\t\tuint16_t   %d\n",sox->replyNum);
+	printf("rc->componentId:\tuint16_t   %d\n",rc->componentId);
+	printf("rc->what:\t\t uint8_t   %c\n",rc->what);
+	printf("sizeof(dasp):\t\t uint8_t   %d\n", sizeof(dasp));
+}
+
 int main(int argc, char const *argv[])
 {
 	int client_sockfd;
-	int len,sox_len=10;
+	int len,sox_len=10,i;
 	struct sockaddr_in remote_addr; //服务器端网络地址结构体
 	int sin_size;
-	char buf[BUFSIZ];  //数据传送的缓冲区
+	char *buffer;
 
 	DASP_STRUCT *dasp;
 	SOX_STRUCT *sox;
 
 	sox = createsox('c',1,12,'t');
 	dasp = createdasp(sox);
+	dasp_debug(dasp);
 
 	memset(&remote_addr,0,sizeof(remote_addr)); //数据初始化--清零
 	remote_addr.sin_family=AF_INET; //设置为IP通信
@@ -80,8 +100,6 @@ int main(int argc, char const *argv[])
 		perror("socket");
 		return 1;
 	}
-	strcpy(buf,"This is a test message");
-	printf("sending: '%s'\n",buf);
 	sin_size=sizeof(struct sockaddr_in);
 
 	/*向服务器发送数据包*/
@@ -89,6 +107,14 @@ int main(int argc, char const *argv[])
 	{
 		perror("recvfrom");
 		return 1;
+	}else{
+		recvfrom(client_sockfd,buffer,sizeof(buffer),0,(struct sockaddr *)&remote_addr,&len);
+		printf("len:%d\n", len);
+		for (i = 0; i < len; i++)
+		{
+			printf("%p\t", buffer++);
+		}
+		printf("\n");
 	}
 	close(client_sockfd);
 	return 0;
