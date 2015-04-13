@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from gi.repository import Notify
+import pprint
 
 app = Flask(__name__)
 Notify.init('hello world')
@@ -11,10 +12,12 @@ def hello():
 
 @app.route('/tasker')
 def taskerhander():
-	title = request.form.get('t','')
-	Hello=Notify.Notification.new (title,"This is an example notification.","dialog-information")
-	Hello.show ()
-	return 'tasker'
+	#pprint.pprint(request.args.get('t'))
+	title = request.args.get('t','')
+	Hello=Notify.Notification.new(title,"","information")
+	Hello.show()
+	#dump(request)
+	return 'title'
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0',debug=True)
