@@ -1,3 +1,6 @@
+#!/bin/python3
+# A notify popup for android app tasker base on linux
+
 from flask import Flask
 from flask import request
 from gi.repository import Notify
