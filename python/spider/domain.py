@@ -79,7 +79,7 @@ class Spider:
             ip = tds[1].text
             port = tds[2].text
             typ = tds[5].text
-            proxy = {typ: 'http://{}:{}'.format(ip,port)}
+            proxy = {typ: 'http://{}:{}'.format(ip, port)}
 
             self.proxies.append(proxy)
 
